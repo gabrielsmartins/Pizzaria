@@ -10,6 +10,11 @@
         <h:outputStylesheet library="css" name="ribbon.css"/>
     </h:head>   
     <h:body>
+
+        <p:panel header="Pizzaria Bella Pizza" footer="IFSP - GRU">
+            <h:outputText value="Bem-Vindo #{usuarioLogado.nome}"/>
+        </p:panel>
+            
         <p:ribbon>
             <p:tab title="Pedidos">
                 <p:ribbonGroup label="Options">
@@ -42,17 +47,53 @@
                         <f:selectItem itemLabel="72" itemValue="72" />
                     </p:selectOneMenu>
 
-                    <p:selectManyButton>
-                        <f:selectItem itemLabel="b" itemValue="b" />
-                        <f:selectItem itemLabel="u" itemValue="u" />
-                        <f:selectItem itemLabel="i" itemValue="i" />
-                    </p:selectManyButton>
-
+                   
                     <p:colorPicker />  
                 </p:ribbonGroup>
+                
+                
+                
+                
             </p:tab>
 
+             <p:tab title="Clientes">
+                <p:ribbonGroup label="Zoom">
+                    <p:commandButton value="In" icon="ui-ribbonicon-zoomin" styleClass="ui-ribbon-bigbutton" type="button" />
+                    <p:commandButton value="Out" icon="ui-ribbonicon-zoomout" styleClass="ui-ribbon-bigbutton" type="button"/>   
+                </p:ribbonGroup>
+            </p:tab>
+            
+            
             <p:tab title="Produtos">
+                <p:ribbonGroup label="Zoom">
+                    <p:commandButton value="In" icon="ui-ribbonicon-zoomin" styleClass="ui-ribbon-bigbutton" type="button" />
+                    <p:commandButton value="Out" icon="ui-ribbonicon-zoomout" styleClass="ui-ribbon-bigbutton" type="button"/>   
+                </p:ribbonGroup>
+            </p:tab>
+            
+            
+            <p:tab title="Fornecedores">
+                <p:ribbonGroup label="Zoom">
+                    <p:commandButton value="In" icon="ui-ribbonicon-zoomin" styleClass="ui-ribbon-bigbutton" type="button" />
+                    <p:commandButton value="Out" icon="ui-ribbonicon-zoomout" styleClass="ui-ribbon-bigbutton" type="button"/>   
+                </p:ribbonGroup>
+            </p:tab>
+            
+             <p:tab title="Pagamentos">
+                <p:ribbonGroup label="Zoom">
+                    <p:commandButton value="In" icon="ui-ribbonicon-zoomin" styleClass="ui-ribbon-bigbutton" type="button" />
+                    <p:commandButton value="Out" icon="ui-ribbonicon-zoomout" styleClass="ui-ribbon-bigbutton" type="button"/>   
+                </p:ribbonGroup>
+            </p:tab>
+            
+             <p:tab title="Comprovantes Entrega">
+                <p:ribbonGroup label="Zoom">
+                    <p:commandButton value="In" icon="ui-ribbonicon-zoomin" styleClass="ui-ribbon-bigbutton" type="button" />
+                    <p:commandButton value="Out" icon="ui-ribbonicon-zoomout" styleClass="ui-ribbon-bigbutton" type="button"/>   
+                </p:ribbonGroup>
+            </p:tab>
+            
+             <p:tab title="Notificações">
                 <p:ribbonGroup label="Zoom">
                     <p:commandButton value="In" icon="ui-ribbonicon-zoomin" styleClass="ui-ribbon-bigbutton" type="button" />
                     <p:commandButton value="Out" icon="ui-ribbonicon-zoomout" styleClass="ui-ribbon-bigbutton" type="button"/>   
