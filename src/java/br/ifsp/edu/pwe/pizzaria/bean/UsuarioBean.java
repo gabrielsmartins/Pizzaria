@@ -11,7 +11,9 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -46,6 +48,10 @@ public class UsuarioBean implements Serializable {
             return null;
             
         } else {
+            
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            HttpSession session = (HttpSession) context.getSession(false);
+            session.setAttribute("usuarioLogado", usuario);
             return "/main";
         }
     }

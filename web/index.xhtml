@@ -5,22 +5,24 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Autenticação do Sistema</title>
-        <h:outputStylesheet library="css" name="estilo.css"/>
+        <!-- <h:outputStylesheet library="css" name="estilo.css"/> -->
     </h:head>
     <h:body>
-            <h:form id="entrar">
-                <h1>Login</h1>
-                <h:panelGrid  id="entrarGrid">
+        <h:form>
+            <h1>Login</h1>
+            <p:messages id="messages" />
+            <p:fieldset legend="Autenticação"> 
+                <h:panelGrid columns="2">
                     <h:outputLabel for="email" value="E-mail: " />
                     <h:inputText id="email" value="#{usuarioBean.usuario.login}" required="true" requiredMessage="Informe o e-mail">
                     </h:inputText>
-                    <p:messages id="messages" />
                     <h:outputLabel for="senha" value="Senha: " />
-                    <h:inputSecret id="senha" required="true" binding="#{usuarioBean.usuario.senha}" requiredMessage="Informe a senha" />
+                    <h:inputSecret id="senha" required="true" value="#{usuarioBean.usuario.senha}" requiredMessage="Informe a senha" />
                     <h:message for="entrarGrid" style="color:red;" />
-                    <p:commandButton value="Login" process="@form" action="#{usuarioBean.autentica()}" ajax="false"/>
-                </h:panelGrid>            
-            </h:form>
+                    <p:commandButton value="Login" icon="ui-icon-check" process="@form" action="#{usuarioBean.autentica()}" ajax="false" />
+                </h:panelGrid>   
+            </p:fieldset>
+        </h:form>
     </h:body>
 </html>
 
