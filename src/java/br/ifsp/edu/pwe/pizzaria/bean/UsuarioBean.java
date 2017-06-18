@@ -23,8 +23,9 @@ import javax.servlet.http.HttpSession;
 @ViewScoped
 public class UsuarioBean implements Serializable {
 
+   private final UsuarioDAO usuarioDAO = new UsuarioDAO();
    private Usuario usuario = new Usuario();
-   private UsuarioDAO usuarioDAO = new UsuarioDAO();
+  
 
    
     public Usuario getUsuario() {
@@ -52,7 +53,7 @@ public class UsuarioBean implements Serializable {
             ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
             HttpSession session = (HttpSession) context.getSession(false);
             session.setAttribute("usuarioLogado", usuario);
-            return "/main";
+            return "/fornecedor";
         }
     }
 

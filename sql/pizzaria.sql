@@ -14,6 +14,7 @@ DROP TABLE pedido_detalhe;
 DROP TABLE pedido;
 DROP TABLE usuario;
 
+INSERT INTO usuario(usr_nome,usr_login,usr_senha,usr_nivel)VALUES('Gabriel','gabriel@gmail.com','12345',2);
 CREATE TABLE usuario(usr_id INT AUTO_INCREMENT NOT NULL,
 					 usr_nome VARCHAR(200) NOT NULL,
                      usr_login VARCHAR(200) NOT NULL,

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Menu Principal</title>
+        <h:outputStylesheet library="font-awesome-4.7.0" name="css/font-awesome.css"/>
+        <h:outputStylesheet library="css" name="ribbon.css"/>
+    </h:head>   
+    <h:body>
+        <p:panel header="Pizzaria Bella Pizza" footer="IFSP - GRU">
+            <h:outputText value="Bem-Vindo #{usuarioLogado.nome}"/>
+        </p:panel>
+        <p:tabView>
+            <p:tab title="Clientes">
+                <p:ribbon>
+                    <p:tab title="Menu">
+                        <p:ribbonGroup label="Zoom">
+                            <p:commandButton value="In" icon="ui-ribbonicon-zoomin" styleClass="ui-ribbon-bigbutton" type="button" />
+                            <p:commandButton value="Out" icon="ui-ribbonicon-zoomout" styleClass="ui-ribbon-bigbutton" type="button"/>   
+                        </p:ribbonGroup>
+                    </p:tab>
+                </p:ribbon>
+            </p:tab>
+        </p:tabView>
+    </h:body>
+</html>
+

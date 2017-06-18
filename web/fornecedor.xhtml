@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Menu Principal</title>
+        <h:outputStylesheet library="font-awesome-4.7.0" name="css/font-awesome.css"/>
+        <h:outputStylesheet library="css" name="ribbon.css"/>
+    </h:head>   
+    <h:body>
+        <p:panel header="Pizzaria Bella Pizza" footer="IFSP - GRU">
+            <h:outputText value="Bem-Vindo #{usuarioLogado.nome}"/>
+        </p:panel>
+        <p:panel header="Fornecedores">
+            <h:form>
+                <p:growl id="growl" showDetail="true" sticky="true" />
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="CNPJ" for="cnpj"/>
+                    <h:inputText id="cnpj" value="#{fornecedorBean.fornecedor.cnpj}"/>
+                    <h:outputLabel value="Nome" for="cnpj"/>
+                    <h:inputText id="nome" value="#{fornecedorBean.fornecedor.nome}"/>
+                    <h:outputLabel value="Endereco" for="endereco"/>
+                    <h:inputText id="endereco" value="#{fornecedorBean.fornecedor.endereco}"/>
+                    <h:outputLabel value="Número" for="numero"/>
+                    <h:inputText id="numero" value="#{fornecedorBean.fornecedor.numero}"/>
+                    <h:outputLabel value="CEP" for="cep"/>
+                    <h:inputText id="cep" value="#{fornecedorBean.fornecedor.cep}"/>
+                    <h:outputLabel value="Complemento" for="complemento"/>
+                    <h:inputText id="complemento" value="#{fornecedorBean.fornecedor.complemento}"/>
+                    <h:outputLabel value="Cidade" for="cidade"/>
+                    <h:inputText id="cidade" value="#{fornecedorBean.fornecedor.cidade}"/>
+                    <h:outputLabel value="Estado" for="estado"/>
+                    <h:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}">
+                        <f:selectItem itemValue="SP" itemLabel="SP"/>
+                    </h:selectOneMenu>                  
+                    <h:outputLabel value="Telefone" for="telefone"/>
+                    <h:inputText id="telefone" value="#{fornecedorBean.fornecedor.telefone}"/>
+                    <h:outputLabel value="Ativo" for="ativo"/>
+                    <p:inputSwitch id="ativo" value="#{fornecedorBean.fornecedor.ativo}"/>
+                    <p:commandButton value="Cadastrar" action="#{fornecedorBean.cadastrar()}" update="growl"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+        <p:dataTable var="fornecedor" value="#{fornecedorBean.fornecedores}" paginator="true">
+            <p:column headerText="ID" sortBy="#{fornecedor.id}" filterBy="#{fornecedor.id}">
+                <h:outputText value="#{fornecedor.id}"/>
+            </p:column>
+            <p:column headerText="CNPJ" sortBy="#{fornecedor.cnpj}" filterBy="#{fornecedor.cnpj}">
+                <h:outputText value="#{fornecedor.cnpj}"/>
+            </p:column>
+            <p:column headerText="Nome" sortBy="#{fornecedor.nome}" filterBy="#{fornecedor.nome}">
+                <h:outputText value="#{fornecedor.nome}"/>
+            </p:column>
+            <p:column headerText="Endereço" sortBy="#{fornecedor.endereco}" filterBy="#{fornecedor.endereco}">
+                <h:outputText value="#{fornecedor.endereco}"/>
+            </p:column>
+            <p:column headerText="Número" sortBy="#{fornecedor.numero}" filterBy="#{fornecedor.numero}">
+                <h:outputText value="#{fornecedor.numero}"/>
+            </p:column>
+            <p:column headerText="CEP" sortBy="#{fornecedor.cep}" filterBy="#{fornecedor.cep}">
+                <h:outputText value="#{fornecedor.cep}"/>
+            </p:column>
+            <p:column headerText="Complemento" sortBy="#{fornecedor.complemento}" filterBy="#{fornecedor.complemento}">
+                <h:outputText value="#{fornecedor.complemento}"/>
+            </p:column>
+            <p:column headerText="Cidade" sortBy="{fornecedor.cidade}" filterBy="#{fornecedor.cidade}">
+                <h:outputText value="#{fornecedor.cidade}"/>
+            </p:column>
+            <p:column headerText="Estado" sortBy="#{fornecedor.estado}" filterBy="#{fornecedor.estado}">
+                <h:outputText value="#{fornecedor.estado}"/>
+            </p:column>
+            <p:column headerText="Telefone" sortBy="#{fornecedor.telefone}" filterBy="#{fornecedor.telefone}">
+                <h:outputText value="#{fornecedor.telefone}"/>
+            </p:column>
+            <p:column headerText="Ativo" sortBy="#{fornecedor.ativo}" filterBy="#{fornecedor.ativo}">
+                <h:outputText value="#{fornecedor.ativo}"/>
+            </p:column>
+        </p:dataTable>
+    </h:body>
+</html>
+
