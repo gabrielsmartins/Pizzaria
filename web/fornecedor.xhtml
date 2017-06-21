@@ -16,34 +16,91 @@
         <p:panel header="Fornecedores">
             <h:form>
                 <p:growl id="growl" showDetail="true" sticky="true" />
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="CNPJ" for="cnpj"/>
-                    <h:inputText id="cnpj" value="#{fornecedorBean.fornecedor.cnpj}"/>
-                    <h:outputLabel value="Nome" for="cnpj"/>
-                    <h:inputText id="nome" value="#{fornecedorBean.fornecedor.nome}"/>
-                    <h:outputLabel value="Endereco" for="endereco"/>
-                    <h:inputText id="endereco" value="#{fornecedorBean.fornecedor.endereco}"/>
-                    <h:outputLabel value="Número" for="numero"/>
-                    <h:inputText id="numero" value="#{fornecedorBean.fornecedor.numero}"/>
-                    <h:outputLabel value="CEP" for="cep"/>
-                    <h:inputText id="cep" value="#{fornecedorBean.fornecedor.cep}"/>
-                    <h:outputLabel value="Complemento" for="complemento"/>
-                    <h:inputText id="complemento" value="#{fornecedorBean.fornecedor.complemento}"/>
-                    <h:outputLabel value="Cidade" for="cidade"/>
-                    <h:inputText id="cidade" value="#{fornecedorBean.fornecedor.cidade}"/>
-                    <h:outputLabel value="Estado" for="estado"/>
-                    <h:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}">
-                        <f:selectItem itemValue="SP" itemLabel="SP"/>
-                    </h:selectOneMenu>                  
-                    <h:outputLabel value="Telefone" for="telefone"/>
-                    <h:inputText id="telefone" value="#{fornecedorBean.fornecedor.telefone}"/>
-                    <h:outputLabel value="Ativo" for="ativo"/>
-                    <p:inputSwitch id="ativo" value="#{fornecedorBean.fornecedor.ativo}"/>
-                    <p:commandButton value="Cadastrar" action="#{fornecedorBean.cadastrar()}" update="growl"/>
+                <h:inputHidden id="id" value="#{fornecedorBean.fornecedor.cnpj}"/>
+                <h:panelGrid>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="CNPJ:" for="cnpj"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="cnpj" value="#{fornecedorBean.fornecedor.cnpj}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Nome:" for="nome"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="nome" value="#{fornecedorBean.fornecedor.nome}" style="width:500px;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Endereco:" for="endereco"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="endereco" value="#{fornecedorBean.fornecedor.endereco}" style="width:500px;"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Número:" for="numero"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="numero" value="#{fornecedorBean.fornecedor.numero}" style="width:100px;"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Complemento:" for="complemento"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="complemento" value="#{fornecedorBean.fornecedor.complemento}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="CEP: " for="cep"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="cep" value="#{fornecedorBean.fornecedor.cep}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Cidade: " for="cidade"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="cidade" value="#{fornecedorBean.fornecedor.cidade}" style="width: 400px;"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" Estado: " for="estado"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}">
+                                <f:selectItem itemValue="SP" itemLabel="SP"/>
+                            </p:selectOneMenu>    
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Telefone: " for="telefone"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="telefone" value="#{fornecedorBean.fornecedor.telefone}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Ativo" for="ativo"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputSwitch id="ativo" value="#{fornecedorBean.fornecedor.ativo}"/>
+                        </p:column>
+                    </p:row>
+                    <p:commandButton value="Salvar" action="#{fornecedorBean.salvar()}" update="growl" ajax="false"/>
                 </h:panelGrid>
             </h:form>
         </p:panel>
-        <p:dataTable var="fornecedor" value="#{fornecedorBean.fornecedores}" paginator="true">
+        <p:dataTable id="fornecedores" var="fornecedor" value="#{fornecedorBean.fornecedores}" paginator="true">
             <p:column headerText="ID" sortBy="#{fornecedor.id}" filterBy="#{fornecedor.id}">
                 <h:outputText value="#{fornecedor.id}"/>
             </p:column>
@@ -75,7 +132,17 @@
                 <h:outputText value="#{fornecedor.telefone}"/>
             </p:column>
             <p:column headerText="Ativo" sortBy="#{fornecedor.ativo}" filterBy="#{fornecedor.ativo}">
-                <h:outputText value="#{fornecedor.ativo}"/>
+                <h:outputText value="#{fornecedor.ativo}"/>             
+            </p:column>
+            <p:column headerText="Excluir">
+                <h:form>
+                    <p:commandButton value="Excluir" action="#{fornecedorBean.excluir(fornecedor.id)}" ajax="false"/> 
+                </h:form>
+            </p:column>
+            <p:column headerText="Editar">
+                <h:form>
+                    <p:commandButton value="Editar" action="#{fornecedorBean.editar(fornecedor.id)}" ajax="false"/> 
+                </h:form>
             </p:column>
         </p:dataTable>
     </h:body>

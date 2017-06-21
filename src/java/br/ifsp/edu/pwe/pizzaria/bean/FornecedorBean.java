@@ -29,10 +29,26 @@ public class FornecedorBean {
         this.fornecedor = fornecedor;
     }
     
-    public void cadastrar(){
+    public void salvar(){
         FacesContext context = FacesContext.getCurrentInstance();
-        this.fornecedorDAO.insert(fornecedor);
-        context.addMessage(null , new FacesMessage("Sucesso","Cadastro Realizado com Sucesso"));
+        if(this.fornecedor.getId() == null)
+            this.fornecedorDAO.insert(fornecedor);
+        else
+            this.fornecedorDAO.update(fornecedor);
+        context.addMessage(null , new FacesMessage("Sucesso","Dados Salvos com Sucesso"));
+        this.fornecedor = new Fornecedor();
+    }
+    
+    public void editar(Long id){
+        FacesContext context = FacesContext.getCurrentInstance();
+        this.fornecedor = this.fornecedorDAO.find(id);
+    }
+    
+    public void excluir(Long id){
+        FacesContext context = FacesContext.getCurrentInstance();
+        this.fornecedorDAO.delete(id);
+        context.addMessage(null , new FacesMessage("Sucesso","Exclusão Realizada com Sucesso"));
+        //return "/fornecedor";
     }
     
     public List<Fornecedor> getFornecedores(){
