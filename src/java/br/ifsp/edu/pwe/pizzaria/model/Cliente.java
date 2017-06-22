@@ -39,6 +39,8 @@ public class Cliente implements Serializable{
     private String estado;
     @Column(name="cli_num")
     private String numero;
+    @Column(name="cli_bair")
+    private String bairro;
     @Column(name="cli_cep")
     private String cep;
     @Column(name="cli_tel")
@@ -105,6 +107,16 @@ public class Cliente implements Serializable{
     public void setNumero(String numero) {
         this.numero = numero;
     }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+    
+    
 
     public String getCep() {
         return cep;

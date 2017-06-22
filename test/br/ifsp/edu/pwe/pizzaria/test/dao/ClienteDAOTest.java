@@ -33,6 +33,7 @@ public class ClienteDAOTest {
         Cliente c = new Cliente();
         c.setNome("Gabriel");
         c.setEndereco("Rua A");
+        c.setBairro("Barrio A");
         c.setComplemento("Residência");
         c.setCidade("Guarulhos");
         c.setEstado("SP");
@@ -48,6 +49,7 @@ public class ClienteDAOTest {
         c.setId(ClienteDAOTest.cliente.getId());
         c.setNome("Gabriel Martins");
         c.setEndereco("Rua B");
+        c.setBairro("Bairro B");
         c.setComplemento("Residência");
         c.setCidade("Guarulhos");
         c.setEstado("SP");

@@ -38,6 +38,7 @@ public class FornecedorTestDAO {
         f.setNome("Fornecedor A");
         f.setCnpj(0505564564L);
         f.setEndereco("Rua A");
+        f.setBairro("Bairro A");
         f.setComplemento("Residência");
         f.setCidade("Guarulhos");
         f.setEstado("SP");
@@ -55,6 +56,7 @@ public class FornecedorTestDAO {
         f.setCnpj(0064564464L);
         f.setNome("Fornecedor A");
         f.setEndereco("Rua B");
+        f.setBairro("Bairro B");
         f.setComplemento("Residência");
         f.setCidade("Guarulhos");
         f.setEstado("SP");

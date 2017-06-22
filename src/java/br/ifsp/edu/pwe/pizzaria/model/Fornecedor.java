@@ -46,6 +46,8 @@ public class Fornecedor implements Serializable{
     private String estado;
     @Column(name="forn_num")
     private String numero;
+    @Column(name="forn_bair")
+    private String bairro;
     @Column(name="forn_cep")
     private String cep;
     @Column(name="forn_tel")
@@ -114,6 +116,24 @@ public class Fornecedor implements Serializable{
     public void setNumero(String numero) {
         this.numero = numero.toUpperCase();
     }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+    
+    
 
     public String getCep() {
         return cep;
