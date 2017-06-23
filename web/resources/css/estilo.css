@@ -1,74 +1,28 @@
-            body{
-                background: rgba(183,222,237,1);
-                background: -moz-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
-                background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(183,222,237,1)), color-stop(9%, rgba(132,213,240,1)), color-stop(98%, rgba(33,180,226,1)), color-stop(100%, rgba(183,222,237,1)));
-                background: -webkit-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
-                background: -o-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
-                background: -ms-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
-                background: linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
-            }
-            #entrar{
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                height: 430px;    
-                width: 350px;
-                transform: translate(-50%,-50%);
-                box-shadow: 0px 10px 20px 5px black;
-                padding: 35px;
-                font-family: Arial, Helvetica, sans-serif;
-                background-color: #efefef;
-           }
-           
-           #entrar > h1{
-               border-bottom: 1px solid #797979;
-               padding-bottom: 20px;
-               text-align: center;
-               text-transform: uppercase;
-               color: #5f5858;
-           }
-           
-           table{
-               margin: 0 auto;
-               width: 100%;
-           }
-           table input{
-               width: 100%;
-               height: 25px;
-               border: 1px solid darkgrey;
-               background-color: #ececec;
-           }
-           table label{
-                font-size: 17px;
-                text-transform: uppercase;
-                color: #5f5858;
-           }
-           
-           table td{
-                text-align: left;
-           }
-           
-           input[type="submit"], input[type="button"]{
-            background: #43a6eb;
-            color: white;
-            text-transform: uppercase;
-            font-size: 16px;
-            font-weight: bold;
-            height: 45px;
-            cursor: pointer;
-            margin-bottom: 10px;
-           }
-           
-           input[type="button"]{
-            background: #7c96a9;
-            color: white;
-            text-transform: uppercase;
-            font-size: 16px;
-            font-weight: bold;
-            height: 45px;
-           }
-           
-           span{
-                margin-bottom: 45px;
-           }
-           
+#login{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 300px;    
+    width: 350px;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 10px 20px 5px black;
+    padding: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #efefef;
+
+    background: rgba(183,222,237,1);
+    background: -moz-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(183,222,237,1)), color-stop(9%, rgba(132,213,240,1)), color-stop(98%, rgba(33,180,226,1)), color-stop(100%, rgba(183,222,237,1)));
+    background: -webkit-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
+    background: -o-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
+    background: -ms-linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
+    background: linear-gradient(45deg, rgba(183,222,237,1) 0%, rgba(132,213,240,1) 9%, rgba(33,180,226,1) 98%, rgba(183,222,237,1) 100%);
+}
+
+h1{
+    text-align: center;
+}
+
+legend{
+    background: #cccccc;
+}
