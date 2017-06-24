@@ -50,7 +50,7 @@
                     <p:outputLabel value="Telefone: " for="telefone"/>
                     <p:inputNumber id="telefone" value="#{clienteBean.cliente.telefone}"/>
 
-                    <p:commandButton value="Salvar" action="#{fornecedorBean.salvar()}" update="growl" ajax="false"/>
+                    <p:commandButton value="Salvar" action="#{clienteBean.salvar()}" update="growl" ajax="false"/>
                 </h:panelGrid>
             </h:form>
         </p:panel>
