@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpSession;
  * @author HOME-PC
  */
 @ManagedBean
-@ViewScoped
 public class UsuarioBean implements Serializable {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -51,12 +49,23 @@ public class UsuarioBean implements Serializable {
             HttpSession session = (HttpSession) context.getSession(false);
             session.setAttribute("usuarioLogado", usuario);
             try {
-                context.redirect("views/fornecedor/fornecedor.jsf");
+                context.redirect("views/common/main.jsf");
             } catch (IOException ex) {
                 Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
+    }
+    
+    public void logout(){
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpSession session = (HttpSession) context.getSession(false);
+        session.removeAttribute("usuarioLogado");
+        try {
+            context.redirect("/pizzaria");
+        } catch (IOException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+}
     }
 
 }

@@ -29,7 +29,7 @@ public class PedidoLocal extends Pedido {
         this.numeroMesa = numeroMesa;
     }
 
-    public Boolean isSolicitadoPagamento() {
+    public Boolean getSolicitadoPagamento() {
         return solicitadoPagamento;
     }
 

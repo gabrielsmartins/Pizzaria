@@ -15,15 +15,25 @@ import javax.faces.context.FacesContext;
  */
 
 @ManagedBean
-@SessionScoped
 public class FornecedorBean {
     
     private final FornecedorDAO fornecedorDAO = new FornecedorDAO();
     private Fornecedor fornecedor = new Fornecedor();
+    private Fornecedor selectedFornecedor = new Fornecedor();
 
     public Fornecedor getFornecedor() {
         return fornecedor;
     }
+
+    public Fornecedor getSelectedFornecedor() {
+        return selectedFornecedor;
+    }
+
+    public void setSelectedFornecedor(Fornecedor selectedFornecedor) {
+        this.selectedFornecedor = selectedFornecedor;
+    }
+    
+    
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;

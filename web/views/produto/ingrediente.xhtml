@@ -7,7 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Produtos</title>
+        <title>Ingredientes</title>
         <h:outputStylesheet library="font-awesome-4.7.0" name="css/font-awesome.css"/>
         <h:outputStylesheet library="css" name="ribbon.css"/>
     </h:head>   
@@ -41,10 +41,10 @@
 
 
                             <p:outputLabel value="Preço:" for="preco"/>
-                            <p:inputText id="preco" value="#{ingredienteBean.ingrediente.preco}" required="true" requiredMessage="Por favor preencha o Preço"/>
+                            <p:inputNumber id="preco" value="#{ingredienteBean.ingrediente.preco}" required="true" requiredMessage="Por favor preencha o Preço"/>
 
                             <p:outputLabel value="Quantidade:" for="quantidade"/>
-                            <p:inputText id="quantidade" value="#{ingredienteBean.ingrediente.quantidade}" required="true" requiredMessage="Por favor preencha a Quantidade"/>
+                            <p:inputNumber id="quantidade" value="#{ingredienteBean.ingrediente.quantidade}" required="true" requiredMessage="Por favor preencha a Quantidade"/>
 
                             <p:outputLabel value="Tamanho / Volume:"/>
                             <p:selectOneMenu id="volume" value="#{ingredienteBean.ingrediente.tamanhoVolume}" required="true" requiredMessage="Por favor preencha o Volume">
@@ -63,60 +63,69 @@
                                 <f:selectItem itemValue="2,5L" itemLabel="2,5L" />
                                 <f:selectItem itemValue="3L" itemLabel="3L" />
                             </p:selectOneMenu>
+
+                            <h:inputHidden/>
                             <p:commandButton value="Salvar" action="#{ingredienteBean.salvar()}" update="growl" ajax="false"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
 
 
-                <p:dataTable id="produtos" var="ingrediente" value="#{ingredienteBean.ingredientes}" paginator="true">
-                    <f:facet name="header">
-                        Lista de Ingredientes Cadastrados
-                    </f:facet>
-                    <p:column style="width:16px">
-                        <p:rowToggler />
-                    </p:column>
-                    <p:column headerText="ID" sortBy="#{ingrediente.id}" filterBy="#{ingrediente.id}">
-                        <h:outputText value="#{ingrediente.id}"/>
-                    </p:column>
-                    <p:column headerText="Descrição" sortBy="#{ingrediente.descricao}" filterBy="#{ingrediente.descricao}">
-                        <h:outputText value="#{ingrediente.descricao}"/>
-                    </p:column>
-                    <p:column headerText="Quantidade" sortBy="#{ingrediente.preco}" filterBy="#{ingrediente.preco}">
-                        <h:outputText value="#{ingrediente.quantidade}"/>
-                    </p:column>
-                    <p:column headerText="Preço:" sortBy="#{ingrediente.preco}" filterBy="#{ingrediente.preco}">
-                        <h:outputText value="#{ingrediente.preco}"/>
-                    </p:column>
+                <h:form id="form_ingrediente">
+                    <p:dataTable id="produtos" var="ingrediente" value="#{ingredienteBean.ingredientes}" paginator="true">
+                        <f:facet name="header">
+                            Lista de Ingredientes Cadastrados
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <h:outputText value="#{ingrediente.id}"/>
+                        </p:column>
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{ingrediente.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Quantidade">
+                            <h:outputText value="#{ingrediente.quantidade}"/>
+                        </p:column>
+                        <p:column headerText="Preço:">
+                            <h:outputText value="#{ingrediente.preco}"/>
+                        </p:column>
 
-                    <p:rowExpansion>
-                        <p:panelGrid  columns="2" columnClasses="label,value" style="width:500px">
-                            <f:facet name="header">
-                                <h:outputText value="#{ingrediente.id} - #{ingrediente.id}"/>
-                            </f:facet>
-                            <h:outputText value="Preço:" />
-                            <h:outputText value="#{ingrediente.preco}" />
 
-                            <h:outputText value="Volume?" />
-                            <h:outputText value="#{ingrediente.tamanhoVolume}" />
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton update="ingredienteDetail" oncomplete="PF('ingredienteDialog').show()" icon="ui-icon-search" title="View">
+                                <f:setPropertyActionListener value="#{ingrediente}" target="#{ingredienteBean.selectedIngrediente}" />
+                            </p:commandButton>
+                        </p:column>
 
-                            <h:outputText value="Quantidade:" />
-                            <h:outputText value="#{ingrediente.quantidade}" />
-                        </p:panelGrid>
-                    </p:rowExpansion>
-                    <p:column headerText="Excluir">
-                        <h:form>
-                            <p:commandButton value="Excluir" action="#{ingredienteBean.excluir(bebida.id)}" ajax="false"/> 
-                        </h:form>
-                    </p:column>
-                    <p:column headerText="Editar">
-                        <h:form>
-                            <p:commandButton value="Editar" action="#{ingredienteBean.editar(bebida.id)}" ajax="false"/> 
-                        </h:form>
-                    </p:column>
-                </p:dataTable>
-
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-closethick" action="#{ingredienteBean.excluir(ingrediente.id)}" ajax="false"/> 
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-pencil" action="#{ingredienteBean.editar(ingrediente.id)}" ajax="false"/> 
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
             </p:layoutUnit>
+
+            <p:dialog header="Ingrediente Informações" widgetVar="ingredienteDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="ingredienteDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty ingredienteBean.selectedIngrediente}" columnClasses="label,value">
+                        <h:outputText value="ID:" />
+                        <h:outputText value="#{ingredienteBean.selectedIngrediente.id}"/>
+
+                        <h:outputText value="Descrição" />
+                        <h:outputText value="#{ingredienteBean.selectedIngrediente.descricao}" />
+                        
+                        <h:outputText value="Preço:" />
+                        <h:outputText value="#{ingredienteBean.selectedIngrediente.preco}" />
+
+                        <h:outputText value="Volume:" />
+                        <h:outputText value="#{ingredienteBean.selectedIngrediente.tamanhoVolume}" />
+
+                        <h:outputText value="Quantidade:" />
+                        <h:outputText value="#{ingredienteBean.selectedIngrediente.quantidade}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
         </p:layout>
     </h:body>
 </html>

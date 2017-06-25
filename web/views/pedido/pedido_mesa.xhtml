@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Pedidos Mesa</title>
+        <h:outputStylesheet library="font-awesome-4.7.0" name="css/font-awesome.css"/>
+        <h:outputStylesheet library="css" name="ribbon.css"/>
+    </h:head>   
+    <h:body>
+
+
+        <p:layout style="min-width:400px;min-height:200px;">
+            <p:layoutUnit position="north" resizable="false">
+                <ui:include src="../common/welcome.xhtml" />
+            </p:layoutUnit>
+            <p:layoutUnit position="west">
+                <ui:include src="../common/menu.xhtml" />
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+
+                <p:panel header="Pedidos">
+                    <h:form id="form_pedido">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <h:inputHidden id="id" value="#{pedidoMesaBean.pedido.id}"/>
+                        <h:panelGrid>
+
+                            <p:outputLabel value="Número Mesa" for="numero_mesa"/>
+                            <p:inputText id="numero_mesa" value="#{pedidoMesaBean.pedido.numeroMesa}" style="width:100px;" required="true" requiredMessage="Por favor preencha o Número da Mesa"/>
+
+
+                            <p:outputLabel value="Pizzas:" for="pizzas"/>
+                            <p:selectOneMenu id="pizzas" value="#{pedidoMesaBean.idPizza}" style="width: 300px;">
+                                <f:selectItem itemLabel="Selecione Um" itemValue="" />
+                                <c:forEach items="#{pedidoMesaBean.pizzas}" var="pizza" varStatus="loop">
+                                    <f:selectItem itemValue="#{pizza.id}" itemLabel="#{pizza.descricao}" />
+                                    <p:column style="width:10%">
+                                        <h:outputText value="#{pizza.tamanhoVolume}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText  value="#{pizza.descricao}"/>
+                                    </p:column>
+                                </c:forEach>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Quantidade" for="qntdPizza"/>
+                            <p:inputNumber id="qntdPizza" value="#{pedidoMesaBean.qntdPizza}" />
+                            <p:slider for="qntdPizza"/>
+                            <p:commandButton id="adicionarPizza" value="Adicionar"  update=":form_pedido:tabela" actionListener="#{pedidoMesaBean.adicionarPizza()}"/>
+
+                            <p:outputLabel value="Bebidas:" for="bebidas"/>
+                            <p:selectOneMenu id="bebidas" value="#{pedidoMesaBean.idBebida}" style="width: 300px;">
+                                <f:selectItem itemLabel="Selecione Um" itemValue="" />
+                                <c:forEach items="#{pedidoMesaBean.bebidas}" var="bebida" varStatus="loop">
+                                    <f:selectItem itemValue="#{bebida.id}" itemLabel="#{bebida.descricao}" />
+                                    <p:column style="width:10%">
+                                        <h:outputText value="#{bebida.tamanhoVolume}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText  value="#{bebida.descricao}"/>
+                                    </p:column>
+                                </c:forEach>
+                            </p:selectOneMenu>
+
+
+                            <p:outputLabel value="Quantidade" for="qntdBebida"/>
+                            <p:inputNumber id="qntdBebida" value="#{pedidoMesaBean.qntdBebida}" />
+                            <p:slider for="qntdBebida"/>
+
+
+                            <p:commandButton id="adicionarBebida" value="Adicionar"  update=":form_pedido:tabela" actionListener="#{pedidoMesaBean.adicionarBebida()}"/>
+
+
+
+                            <p:dataTable id="tabela" var="produtoEntry" value="#{pedidoMesaBean.pedido.itens.entrySet().toArray()}">
+                                <p:column headerText="Produto">
+                                    <h:outputText value="#{produtoEntry.key.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Tamanho/Volume">
+                                    <h:outputText value="#{produtoEntry.key.tamanhoVolume}"/>
+                                </p:column>
+                                <p:column headerText="Quantidade">
+                                    <h:outputText value="#{produtoEntry.value}"/>
+                                </p:column>
+                                <p:column headerText="Preço">
+                                    <h:outputText value="#{produtoEntry.key.preco}"/>
+                                </p:column>
+                            </p:dataTable>
+
+
+                            <h:inputHidden/>
+                            <p:commandButton value="Salvar" action="#{pedidoMesaBean.salvar()}" update="growl" ajax="false" />
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel>
+
+
+
+
+                <h:form>
+                    <p:dataTable id="pedidos" var="pedido" value="#{pedidoMesaBean.pedidos}" paginator="true">
+                        <f:facet name="header">
+                            Lista de Pedidos Cadastrados
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <h:outputText value="#{pedido.id}"/>
+                        </p:column>
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{pedido.data}"/>
+                        </p:column>
+                        <p:column headerText="Quantidade">
+                            <h:outputText value="#{pedido.total}"/>
+                        </p:column>
+                        <p:column headerText="Solicitado Pagamento">
+                            <h:outputText value="#{pedido.solicitadoPagamento}"/>
+                        </p:column>
+
+
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton update="pedidoDetail" oncomplete="PF('pedidoDialog').show()" icon="ui-icon-search" title="View">
+                                <f:setPropertyActionListener value="#{pedido}" target="#{pedidoMesaBean.selectedPedidoLocal}" />
+                            </p:commandButton>
+                        </p:column>
+
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-closethick" action="#{pedidoMesaBean.excluir(pedido.id)}" ajax="false"/> 
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-pencil" action="#{pedidoMesaBean.editar(pedido.id)}" ajax="false"/> 
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:layoutUnit>
+            <p:dialog header="Pedido Informações" widgetVar="pedidoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="pedidoDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty pedidoMesaBean.selectedPedidoLocal}" columnClasses="label,value">
+                        <h:outputText value="ID:" />
+                        <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.id}"/>
+
+                        <h:outputText value="Número Mesa:" />
+                        <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.numeroMesa}" />
+
+                        <h:outputText value="Data" />
+                        <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.data}" />
+
+                        <h:outputText value="Solicitado Pagamento" />
+                        <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.solicitadoPagamento}" />
+
+
+                        <h:outputText value="Total" />
+                        <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.total}" />
+
+
+
+                        <h:outputText value="Itens"/>
+                        <h:outputText value="-"/>
+
+
+                        <c:forEach var="itemEntry" items="#{pedidoMesaBean.selectedPedidoLocal.itens}" varStatus="loop">
+                            <h:outputText value="#{itemEntry.key.descricao} - #{itemEntry.key.tamanhoVolume}"/>
+                            <h:outputText value="#{itemEntry.value}"/>
+                        </c:forEach>
+                    </p:panelGrid>
+
+                </p:outputPanel>
+            </p:dialog>
+        </p:layout>
+    </h:body>
+</html>
+

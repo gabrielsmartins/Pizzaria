@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
-
+import static org.junit.Assert.*;
 /**
  *
  * @author home-pc
@@ -82,7 +82,8 @@ public class PizzaDAOTest {
         ingrediente2.setQuantidade(5.00);
         ingrediente2.setTamanhoVolume("1KG");
         ingrediente2.setFornecedor(fornecedor);
-
+        
+        
         
         
         new IngredienteDAO().insert(ingrediente1);
@@ -97,6 +98,10 @@ public class PizzaDAOTest {
        
         p.adicionarIngrediente(ingrediente1, 0.5);
         p.adicionarIngrediente(ingrediente2, 0.2);
+        
+        
+        assertEquals(2, p.getIngredientes().size());
+        
         
         
         PizzaDAOTest.pizza = new PizzaDAO().insert(p);

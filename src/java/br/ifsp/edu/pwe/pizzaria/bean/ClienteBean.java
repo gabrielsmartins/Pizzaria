@@ -19,6 +19,7 @@ public class ClienteBean {
     
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Cliente cliente = new Cliente();
+    private Cliente selectedCliente = new Cliente();
 
     public ClienteDAO getClienteDAO() {
         return clienteDAO;
@@ -35,6 +36,16 @@ public class ClienteBean {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Cliente getSelectedCliente() {
+        return selectedCliente;
+    }
+
+    public void setSelectedCliente(Cliente selectedCliente) {
+        this.selectedCliente = selectedCliente;
+    }
+    
+    
     
     public void salvar(){
         FacesContext context = FacesContext.getCurrentInstance();

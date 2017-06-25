@@ -20,126 +20,134 @@
                 <ui:include src="../common/menu.xhtml" />
             </p:layoutUnit>
             <p:layoutUnit position="center">
-                
-                
+
+
                 <p:panel header="Fornecedores">
+                    <p:growl id="growl" showDetail="true" sticky="true" />
+
                     <h:form>
-                        <p:growl id="growl" showDetail="true" sticky="true" />
-                        <h:inputHidden id="id" value="#{fornecedorBean.fornecedor.cnpj}"/>
-                        <h:panelGrid columns="2" cellpadding="5">
+                        <h:inputHidden id="id" value="#{fornecedorBean.fornecedor.id}"/>
+                        <h:panelGrid columns="6">
+
                             <p:outputLabel value="CNPJ:" for="cnpj"/>
                             <p:inputText id="cnpj" value="#{fornecedorBean.fornecedor.cnpj}" required="true" requiredMessage="Por favor preencha o CNPJ"/>
 
+                            <p:outputLabel value="Ativo" for="ativo"/>
+                            <p:inputSwitch id="ativo" value="#{fornecedorBean.fornecedor.ativo}"/>
+                            <h:inputHidden/><h:inputHidden/>
+
 
                             <p:outputLabel value="Nome:" for="nome"/>
-                            <p:inputText id="nome" value="#{fornecedorBean.fornecedor.nome}" style="width:500px;" required="true" requiredMessage="Por favor preencha o Nome"/>
+                            <p:inputText id="nome" value="#{fornecedorBean.fornecedor.nome}" style="width: 400px;" required="true" requiredMessage="Por favor preencha o Nome"/>
+                            <h:inputHidden/><h:inputHidden/><h:inputHidden/><h:inputHidden/>
 
                             <p:outputLabel value="Endereco:" for="endereco"/>
-                            <p:inputText id="endereco" value="#{fornecedorBean.fornecedor.endereco}" style="width:500px;" required="true" requiredMessage="Por favor preencha o Endereço"/>
-
+                            <p:inputText id="endereco" value="#{fornecedorBean.fornecedor.endereco}"  style="width: 500px;" required="true" requiredMessage="Por favor preencha o Endereço"/>
                             <p:outputLabel value="Número:" for="numero"/>
-                            <p:inputText id="numero" value="#{fornecedorBean.fornecedor.numero}" style="width:100px;" required="true" requiredMessage="Por favor preencha o Número"/>
-
+                            <p:inputText id="numero" value="#{fornecedorBean.fornecedor.numero}"  style="width: 100px;" required="true" requiredMessage="Por favor preencha o Número"/>
                             <p:outputLabel value="Complemento:" for="complemento"/>
                             <p:inputText id="complemento" value="#{fornecedorBean.fornecedor.complemento}" required="true" requiredMessage="Por favor preencha o Complemento"/>
 
-
                             <p:outputLabel value="Bairro:" for="bairro"/>
-                            <p:inputText id="bairro" value="#{fornecedorBean.fornecedor.bairro}" style="width:500px;" required="true" requiredMessage="Por favor preencha o Bairro"/>
-
+                            <p:inputText id="bairro" value="#{fornecedorBean.fornecedor.bairro}" style="width: 400px;" required="true" requiredMessage="Por favor preencha o Bairro"/>
                             <p:outputLabel value="CEP: " for="cep"/>
                             <p:inputText id="cep" value="#{fornecedorBean.fornecedor.cep}" required="true" requiredMessage="Por favor preencha o CEP"/>
+                            <h:inputHidden/><h:inputHidden/>
 
                             <p:outputLabel value="Cidade: " for="cidade"/>
-                            <p:inputText id="cidade" value="#{fornecedorBean.fornecedor.cidade}" style="width: 400px;" required="true" requiredMessage="Por favor preencha a Cidade"/>
-
+                            <p:inputText id="cidade" value="#{fornecedorBean.fornecedor.cidade}"  style="width: 400px;" required="true" requiredMessage="Por favor preencha a Cidade"/>
                             <p:outputLabel value=" Estado: " for="estado"/>
                             <p:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}" required="true" requiredMessage="Por favor preencha o Estado">
                                 <f:selectItem itemValue="SP" itemLabel="SP"/>
                             </p:selectOneMenu>    
-
                             <p:outputLabel value="Telefone: " for="telefone"/>
-                            <p:inputNumber id="telefone" value="#{fornecedorBean.fornecedor.telefone}" required="true" requiredMessage="Por favor preencha o Telefone"/>
+                            <p:inputText id="telefone" value="#{fornecedorBean.fornecedor.telefone}" required="true" requiredMessage="Por favor preencha o Telefone"/>
 
-                            <p:outputLabel value="Ativo" for="ativo"/>
-                            <p:inputSwitch id="ativo" value="#{fornecedorBean.fornecedor.ativo}"/>
-
+                            <h:inputHidden/>
                             <p:commandButton value="Salvar" action="#{fornecedorBean.salvar()}" update="growl" ajax="false"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
 
 
-                <p:dataTable id="fornecedores" var="fornecedor" value="#{fornecedorBean.fornecedores}" paginator="true">
-                    <f:facet name="header">
-                        Lista de Fornecedores Cadastrados
-                    </f:facet>
-                    <p:column style="width:16px">
-                        <p:rowToggler />
-                    </p:column>
-                    <p:column headerText="ID" sortBy="#{fornecedor.id}" filterBy="#{fornecedor.id}">
-                        <h:outputText value="#{fornecedor.id}"/>
-                    </p:column>
-                    <p:column headerText="CNPJ" sortBy="#{fornecedor.cnpj}" filterBy="#{fornecedor.cnpj}">
-                        <h:outputText value="#{fornecedor.cnpj}"/>
-                    </p:column>
-                    <p:column headerText="Nome" sortBy="#{fornecedor.nome}" filterBy="#{fornecedor.nome}">
-                        <h:outputText value="#{fornecedor.nome}"/>
-                    </p:column>
-                    <p:column headerText="Telefone" sortBy="#{fornecedor.telefone}" filterBy="#{fornecedor.telefone}">
-                        <h:outputText value="#{fornecedor.telefone}"/>
-                    </p:column>
-
-                    <p:rowExpansion>
-                        <p:panelGrid  columns="2" columnClasses="label,value" style="width:500px">
-                            <f:facet name="header">
-                                <h:outputText value="#{fornecedor.id} - #{fornecedor.nome}"/>
-                            </f:facet>
-                            <h:outputText value="CNPJ:" />
-                            <h:outputText value="#{fornecedor.cnpj}" />
-
-                            <h:outputText value="Nome:" />
-                            <h:outputText value="#{fornecedor.nome}" />
-
-                            <h:outputText value="Telefone?" />
-                            <h:outputText value="#{fornecedor.telefone}" />
-
-                            <h:outputText value="Endereco:" />
-                            <h:outputText value="#{fornecedor.endereco} , #{fornecedor.numero}" />
-
-                            <h:outputText value="Bairro" />
-                            <h:outputText value="#{fornecedor.bairro}" />
-
-                            <h:outputText value="Complemento:" />
-                            <h:outputText value="#{fornecedor.complemento}" />
-
-                            <h:outputText value="Cidade:" />
-                            <h:outputText value="#{fornecedor.cidade} - #{fornecedor.estado}" />
-
-                            <h:outputText value="CEP:" />
-                            <h:outputText value="#{fornecedor.cep}" />
+                <h:form id="form_forn">
+                    <p:dataTable id="fornecedores" var="fornecedor" value="#{fornecedorBean.fornecedores}" paginator="true">
+                        <f:facet name="header">
+                            Lista de Fornecedores Cadastrados
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <h:outputText value="#{fornecedor.id}"/>
+                        </p:column>
+                        <p:column headerText="CNPJ">
+                            <h:outputText value="#{fornecedor.cnpj}"/>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{fornecedor.nome}"/>
+                        </p:column>
+                        <p:column headerText="Telefone">
+                            <h:outputText value="#{fornecedor.telefone}"/>
+                        </p:column>
 
 
-                            <h:outputText value="Situação:" />
-                            <h:outputText rendered="#{fornecedor.ativo==true}" value="Sim"/>
-                            <h:outputText rendered="#{fornecedor.ativo==false}" value="Não"/>
-                        </p:panelGrid>
-                    </p:rowExpansion>
-                    <p:column headerText="Excluir">
-                        <h:form>
-                            <p:commandButton value="Excluir" action="#{fornecedorBean.excluir(fornecedor.id)}" ajax="false"/> 
-                        </h:form>
-                    </p:column>
-                    <p:column headerText="Editar">
-                        <h:form>
-                            <p:commandButton value="Editar" action="#{fornecedorBean.editar(fornecedor.id)}" ajax="false"/> 
-                        </h:form>
-                    </p:column>
-                </p:dataTable>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton update="fornDetail" oncomplete="PF('fornDialog').show()" icon="ui-icon-search" title="View">
+                                <f:setPropertyActionListener value="#{fornecedor}" target="#{fornecedorBean.selectedFornecedor}" />
+                            </p:commandButton>
+                        </p:column>
 
-                
-                
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-closethick" action="#{fornecedorBean.excluir(fornecedor.id)}" ajax="false"/> 
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-pencil" action="#{fornecedorBean.editar(fornecedor.id)}" ajax="false"/> 
+                        </p:column>
+                    </p:dataTable>
+
+
+
+
+                </h:form>
             </p:layoutUnit>
+
+            <p:dialog header="Fornecedor Informações" widgetVar="fornDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="fornDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty fornecedorBean.selectedFornecedor}" columnClasses="label,value">
+
+                        <h:outputText value="ID:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.id}" />
+
+                        <h:outputText value="CNPJ:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.cnpj}" />
+
+                        <h:outputText value="Nome:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.nome}" />
+
+                        <h:outputText value="Telefone:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.telefone}" />
+
+                        <h:outputText value="Endereco:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.endereco} , #{fornecedorBean.selectedFornecedor.numero}" />
+
+                        <h:outputText value="Bairro" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.bairro}" />
+
+                        <h:outputText value="Complemento:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.complemento}" />
+
+                        <h:outputText value="Cidade:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.cidade} - #{fornecedorBean.selectedFornecedor.estado}" />
+
+                        <h:outputText value="CEP:" />
+                        <h:outputText value="#{fornecedorBean.selectedFornecedor.cep}" />
+
+
+                        <h:outputText value="Situação:" />
+                        <h:outputText rendered="#{fornecedorBean.selectedFornecedor.ativo==true}" value="Sim"/>
+                        <h:outputText rendered="#{fornecedorBean.selectedFornecedor.ativo==false}" value="Não"/>
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
         </p:layout>
     </h:body>
 </html>

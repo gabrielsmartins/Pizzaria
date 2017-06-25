@@ -21,6 +21,7 @@ public class BebidaBean {
     private final FornecedorDAO fornecedorDAO = new FornecedorDAO();
     private Long idForn;
     private Bebida bebida = new Bebida();
+    private Bebida selectedBebida = new Bebida();
 
     public Long getIdForn() {
         return idForn;
@@ -37,6 +38,16 @@ public class BebidaBean {
     public void setBebida(Bebida bebida) {
         this.bebida = bebida;
     }
+
+    public Bebida getSelectedBebida() {
+        return selectedBebida;
+    }
+
+    public void setSelectedBebida(Bebida selectedBebida) {
+        this.selectedBebida = selectedBebida;
+    }
+    
+    
 
     public void salvar() {
         Fornecedor fornecedor = this.fornecedorDAO.find(idForn);

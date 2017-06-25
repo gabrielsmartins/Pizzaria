@@ -21,6 +21,7 @@ public class IngredienteBean {
     private final FornecedorDAO fornecedorDAO = new FornecedorDAO();
     private Long idForn;
     private Ingrediente ingrediente = new Ingrediente();
+    private Ingrediente selectedIngrediente = new Ingrediente();
 
     public Long getIdForn() {
         return idForn;
@@ -38,6 +39,15 @@ public class IngredienteBean {
         this.ingrediente = ingrediente;
     }
 
+    public Ingrediente getSelectedIngrediente() {
+        return selectedIngrediente;
+    }
+
+    public void setSelectedIngrediente(Ingrediente selectedIngrediente) {
+        this.selectedIngrediente = selectedIngrediente;
+    }
+
+    
     public void salvar() {
         Fornecedor fornecedor = this.fornecedorDAO.find(idForn);
         this.ingrediente.setFornecedor(fornecedor);

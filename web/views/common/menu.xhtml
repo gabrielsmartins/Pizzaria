@@ -10,8 +10,9 @@
 
         <p:panelMenu style="width:300px">
             <p:submenu label="Pedidos">
-                <p:menuitem value="Novo Pedido" url="http://www.primefaces.org" icon="ui-icon-plus" />
-                <p:menuitem value="Pesquisar Pedidos" actionListener="#{menuView.update}"  icon="ui-icon-search" />
+                <p:menuitem value="Novo Pedido Mesa" url="../pedido/pedido_mesa.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Novo Pedido Telefone" url="../pedido/pedido_telefone.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Pedidos" url="../pedido/pedido.jsf" icon="ui-icon-search" />
             </p:submenu>
 
             <p:submenu label="Clientes">
@@ -27,10 +28,10 @@
             <p:submenu label="Produtos">
                 <p:menuitem value="Nova Bebida" url="../produto/bebida.jsf" icon="ui-icon-plus" />
                 <p:menuitem value="Novo Ingrediente" url="../produto/ingrediente.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Nova Pizza" url="../produto/pizza.jsf" icon="ui-icon-plus" />
                 <p:menuitem value="Pesquisar Produtos" url="../fornecedor/produtos.jsf"  icon="ui-icon-search" />
             </p:submenu>
 
-         
         </p:panelMenu>
     </h:form>
 </html>

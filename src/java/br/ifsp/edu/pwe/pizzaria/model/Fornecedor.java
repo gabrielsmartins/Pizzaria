@@ -5,7 +5,6 @@
  */
 package br.ifsp.edu.pwe.pizzaria.model;
 
-import br.ifsp.edu.pwe.pizzaria.util.SampleEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

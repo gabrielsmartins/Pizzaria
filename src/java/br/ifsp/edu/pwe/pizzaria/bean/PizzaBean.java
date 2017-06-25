@@ -3,13 +3,13 @@ package br.ifsp.edu.pwe.pizzaria.bean;
 
 import br.ifsp.edu.pwe.pizzaria.dao.IngredienteDAO;
 import br.ifsp.edu.pwe.pizzaria.dao.PizzaDAO;
-import br.ifsp.edu.pwe.pizzaria.model.Bebida;
 import br.ifsp.edu.pwe.pizzaria.model.Ingrediente;
 import br.ifsp.edu.pwe.pizzaria.model.Pizza;
-import br.ifsp.edu.pwe.pizzaria.model.Produto;
 import java.util.List;
+import javafx.event.ActionEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -18,18 +18,58 @@ import javax.faces.context.FacesContext;
  */
 
 @ManagedBean
+@ViewScoped
 public class PizzaBean {
     
     private final PizzaDAO pizzaDAO = new PizzaDAO();
     private final IngredienteDAO ingredienteDAO = new IngredienteDAO();
     private Pizza pizza = new Pizza();
+    private Pizza selectedPizza = new Pizza();
+    private Long idIngr;
+    private Double qntdIngr;
+    
+    
 
-    public Produto getPizza() {
+    
+    public Pizza getPizza() {
         return pizza;
     }
 
-    public void setPizza(Produto pizza) {
+    public void setPizza(Pizza pizza) {
         this.pizza = new Pizza();
+    }
+
+    public Pizza getSelectedPizza() {
+        return selectedPizza;
+    }
+
+    public void setSelectedPizza(Pizza selectedPizza) {
+        this.selectedPizza = selectedPizza;
+    }
+
+    
+    public Long getIdIngr() {
+        return idIngr;
+    }
+
+    public void setIdIngr(Long idIngr) {
+        this.idIngr = idIngr;
+    }
+
+    public Double getQntdIngr() {
+        return qntdIngr;
+    }
+
+    public void setQntdIngr(Double qntdIngr) {
+        this.qntdIngr = qntdIngr;
+    }
+    
+    
+    
+    
+    public void adicionarIngrediente(){
+        Ingrediente ingrediente = this.ingredienteDAO.find(idIngr);
+        this.pizza.adicionarIngrediente(ingrediente, qntdIngr);
     }
     
     

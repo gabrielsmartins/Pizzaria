@@ -7,7 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Produtos</title>
+        <title>Pizzas</title>
         <h:outputStylesheet library="font-awesome-4.7.0" name="css/font-awesome.css"/>
         <h:outputStylesheet library="css" name="ribbon.css"/>
     </h:head>   
@@ -23,33 +23,57 @@
             </p:layoutUnit>
             <p:layoutUnit position="center">
 
-                <p:panel header="Bebidas">
-                    <h:form>
+                <p:panel header="Pizzas">
+                    <h:form id="form_pizza">
                         <p:growl id="growl" showDetail="true" sticky="true" />
                         <h:inputHidden id="id" value="#{pizzaBean.pizza.id}"/>
-                        <h:panelGrid columns="2" cellpadding="5">
+                        <h:panelGrid>
+
                             <p:outputLabel value="Descrição" for="descricao"/>
                             <p:inputText id="descricao" value="#{pizzaBean.pizza.descricao}" style="width:500px;" required="true" requiredMessage="Por favor preencha a Descrição"/>
 
-                            <p:outputLabel value="Ingredientes:" for="ingrediente"/>
-                            <h:inputHidden/>
-                            <h:inputHidden/>
-                            <p:dataTable id="ingrediente" var="ingrediente" value="#{pizzaBean.ingredientes}">
+
+                            <p:outputLabel value="Ingredientes:" for="ingredientes"/>
+                            <p:selectOneMenu id="ingredientes" value="#{pizzaBean.idIngr}" style="width: 300px;">
+                                <f:selectItem itemLabel="Selecione Um" itemValue="" />
+                                <c:forEach items="#{pizzaBean.ingredientes}" var="ingrediente" varStatus="loop">
+                                    <f:selectItem itemValue="#{ingrediente.id}" itemLabel="#{ingrediente.descricao}" />
+                                    <p:column style="width:10%">
+                                        <h:outputText value="#{ingrediente.tamanhoVolume}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText  value="#{ingrediente.descricao}"/>
+                                    </p:column>
+                                </c:forEach>
+                            </p:selectOneMenu>
+
+
+                            <p:outputLabel value="Quantidade" for="qntd"/>
+                            <p:inputNumber id="qntd" value="#{pizzaBean.qntdIngr}" />
+                            <p:slider for="qntd"/>
+                            <p:commandButton id="adicionar" value="Adicionar"  update=":form_pizza:tabela" actionListener="#{pizzaBean.adicionarIngrediente()}"/>
+
+
+
+
+                            <p:dataTable id="tabela" var="ingredienteEntry" value="#{pizzaBean.pizza.ingredientes.entrySet().toArray()}">
                                 <p:column headerText="Ingrediente">
-                                    <h:outputText value="#{ingrediente.descricao}"/>
+                                    <h:outputText value="#{ingredienteEntry.key.descricao}"/>
                                 </p:column>
                                 <p:column headerText="Tamanho/Volume">
-                                    <h:outputText value="#{ingrediente.tamanhoVolume}"/>
+                                    <h:outputText value="#{ingredienteEntry.key.tamanhoVolume}"/>
                                 </p:column>
                                 <p:column headerText="Quantidade">
-                                    <p:inputText id="qntd" value="#{ingrediente.quantidade}" />
-                                    <p:slider for="qntd"/>
+                                    <h:outputText value="#{ingredienteEntry.value}"/>
                                 </p:column>
-
                             </p:dataTable>
 
-
-
+                            <p:outputLabel value="Preço" for="preco"/>
+                            <p:inputNumber id="preco" value="#{pizzaBean.pizza.preco}" required="true" requiredMessage="Por favor preencha o Preço"/>
+                            <h:inputHidden/>
+                            <h:inputHidden/>
+                            <h:inputHidden/>
 
                             <p:outputLabel value="Tamanho:"/>
                             <p:selectOneMenu id="volume" value="#{pizzaBean.pizza.tamanhoVolume}" required="true" requiredMessage="Por favor preencha o Tamanho">
@@ -58,61 +82,84 @@
                                 <f:selectItem itemValue="M" itemLabel="M" />
                                 <f:selectItem itemValue="G" itemLabel="G" />
                             </p:selectOneMenu>
+                            <h:inputHidden/>
+                            <h:inputHidden/>
+                            <h:inputHidden/>
 
-                            <p:commandButton value="Salvar" action="#{pizzaBean.salvar()}" update="growl" ajax="false"/>
+                            <h:inputHidden/>
+                            <p:commandButton value="Salvar" action="#{pizzaBean.salvar()}" update="growl" ajax="false" />
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
 
 
-                <p:dataTable id="produtos" var="pizza" value="#{pizzaBean.pizzas}" paginator="true">
-                    <f:facet name="header">
-                        Lista de Pizzas Cadastrados
-                    </f:facet>
-                    <p:column style="width:16px">
-                        <p:rowToggler />
-                    </p:column>
-                    <p:column headerText="ID" sortBy="#{pizza.id}" filterBy="#{pizza.id}">
-                        <h:outputText value="#{pizza.id}"/>
-                    </p:column>
-                    <p:column headerText="Descrição" sortBy="#{pizza.descricao}" filterBy="#{pizza.descricao}">
-                        <h:outputText value="#{pizza.descricao}"/>
-                    </p:column>
-                    <p:column headerText="Quantidade" sortBy="#{pizza.preco}" filterBy="#{pizza.preco}">
-                        <h:outputText value="#{pizza.quantidade}"/>
-                    </p:column>
-                    <p:column headerText="Preço:" sortBy="#{pizza.preco}" filterBy="#{pizza.preco}">
-                        <h:outputText value="#{pizza.preco}"/>
-                    </p:column>
+                <h:form>
+                    <p:dataTable id="pizzas" var="pizza" value="#{pizzaBean.pizzas}" paginator="true">
+                        <f:facet name="header">
+                            Lista de Pizzas Cadastrados
+                        </f:facet>
 
-                    <p:rowExpansion>
-                        <p:panelGrid  columns="2" columnClasses="label,value" style="width:500px">
-                            <f:facet name="header">
-                                <h:outputText value="#{pizza.id} - #{pizza.id}"/>
-                            </f:facet>
-                            <h:outputText value="Preço:" />
-                            <h:outputText value="#{pizza.preco}" />
+                        <p:column headerText="ID">
+                            <h:outputText value="#{pizza.id}"/>
+                        </p:column>
+                        <p:column headerText="Descrição">
+                            <h:outputText value="#{pizza.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Quantidade">
+                            <h:outputText value="#{pizza.quantidade}"/>
+                        </p:column>
+                        <p:column headerText="Preço:">
+                            <h:outputText value="#{pizza.preco}"/>
+                        </p:column>
 
-                            <h:outputText value="Volume?" />
-                            <h:outputText value="#{pizza.tamanhoVolume}" />
 
-                            <h:outputText value="Quantidade:" />
-                            <h:outputText value="#{pizza.quantidade}" />
-                        </p:panelGrid>
-                    </p:rowExpansion>
-                    <p:column headerText="Excluir">
-                        <h:form>
-                            <p:commandButton value="Excluir" action="#{pizzaBean.excluir(pizza.id)}" ajax="false"/> 
-                        </h:form>
-                    </p:column>
-                    <p:column headerText="Editar">
-                        <h:form>
-                            <p:commandButton value="Editar" action="#{pizzaBean.editar(pizza.id)}" ajax="false"/> 
-                        </h:form>
-                    </p:column>
-                </p:dataTable>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton update="pizzaDetail" oncomplete="PF('pizzaDialog').show()" icon="ui-icon-search" title="View">
+                                <f:setPropertyActionListener value="#{pizza}" target="#{pizzaBean.selectedPizza}" />
+                            </p:commandButton>
+                        </p:column>
 
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-closethick" action="#{pizzaBean.excluir(pizza.id)}" ajax="false"/> 
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton icon="ui-icon-pencil" action="#{pizzaBean.editar(pizza.id)}" ajax="false"/> 
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
             </p:layoutUnit>
+
+
+            <p:dialog header="Pizza Informações" widgetVar="pizzaDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="pizzaDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty pizzaBean.selectedPizza}" columnClasses="label,value">
+                        <h:outputText value="ID:" />
+                        <h:outputText value="#{pizzaBean.selectedPizza.id}"/>
+           
+
+                        <h:outputText value="Descrição:" />
+                        <h:outputText value="#{pizzaBean.selectedPizza.descricao}" />
+     
+
+                        <h:outputText value="Preço:" />
+                        <h:outputText value="#{pizzaBean.selectedPizza.preco}" />
+      
+
+                        <h:outputText value="Tamanho:" />
+                        <h:outputText value="#{pizzaBean.selectedPizza.tamanhoVolume}" />
+          
+                        <h:outputText value="Ingredientes:"/>
+                        <h:outputText value="-"/>
+                        
+                        
+                        <c:forEach var="ingredienteEntry" items="#{pizzaBean.selectedPizza.ingredientes}" varStatus="loop">
+                            <h:outputText value="#{ingredienteEntry.key.descricao} - #{ingredienteEntry.key.tamanhoVolume}"/>
+                            <h:outputText value="#{ingredienteEntry.value}"/>
+                        </c:forEach>
+                    </p:panelGrid>
+    
+                </p:outputPanel>
+            </p:dialog>
         </p:layout>
     </h:body>
 </html>

@@ -6,6 +6,7 @@
 package br.ifsp.edu.pwe.pizzaria.dao;
 
 import br.ifsp.edu.pwe.pizzaria.model.Cliente;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -15,6 +16,17 @@ public class ClienteDAO extends GenericDAO<Cliente, Long> {
     
     public ClienteDAO(){
         super(Cliente.class);
+    }
+    
+    public Cliente pesquisaClientePorTelefone(Long telefone){
+         try {
+            Cliente cliente = this.entityManager.createQuery("SELECT c from Cliente c where c.telefone = :telefone", Cliente.class)
+                    .setParameter("telefone", Long.valueOf(telefone))
+                    .getSingleResult();
+            return cliente;
+        } catch (NoResultException e) {
+            return null;
+        }
     }
     
 }
