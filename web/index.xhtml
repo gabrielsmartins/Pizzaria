@@ -7,16 +7,16 @@
         <title>Autenticação do Sistema</title>
         <h:outputStylesheet library="css" name="estilo.css"/>
     </h:head>
-    <h:body id="login">
+    <h:body id="login" style="background-image: url('resources/img/pizza.jpg'); background-size: cover;">
         <h:form>
-            <h1>Login</h1>
+            <h1 style="color: white;"><strong>LOGIN</strong></h1>
             <p:messages id="messages" />
             <p:fieldset legend="Autenticação"> 
                 <h:panelGrid columns="2">
                     <p:outputLabel for="email" value="E-mail: " />
                     <p:inputText id="email" value="#{usuarioBean.usuario.login}" required="true" requiredMessage="Informe o e-mail"/>
                     <h:outputLabel for="senha" value="Senha: " />
-                    <p:password id="senha" required="true" value="#{usuarioBean.usuario.senha}" requiredMessage="Informe a senha" />
+                    <p:password id="senha" value="#{usuarioBean.usuario.senha}" required="true" requiredMessage="Informe a senha" />
                     <h:inputHidden/>
                     <p:commandButton value="Login" icon="ui-icon-check" process="@form" action="#{usuarioBean.autentica()}" ajax="false" />
                 </h:panelGrid>   

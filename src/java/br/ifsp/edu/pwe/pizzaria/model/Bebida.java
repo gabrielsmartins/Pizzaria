@@ -5,6 +5,7 @@
  */
 package br.ifsp.edu.pwe.pizzaria.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -15,7 +16,14 @@ import javax.persistence.Entity;
 @Entity
 public class Bebida extends Produto {
 
+    
     public Bebida(){
         
     }
+
+    
+ 
+    
+    
+    
 }

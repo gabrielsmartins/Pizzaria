@@ -28,7 +28,7 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="produto")
-public  class Produto implements Serializable {
+public abstract class Produto implements Serializable {
     
     
     @Id

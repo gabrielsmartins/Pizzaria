@@ -6,46 +6,31 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:form>
-        <p:growl id="messages"/>
-        <p:menubar>
-            <p:submenu label="Pedido">
-                <p:menuitem value="Novo" url="#" />
-                <p:menuitem value="Pagamento" url="#" />
-                <p:menuitem value="Comprovante Entrega" url="#" />
-                <p:separator />
-                <p:menuitem value="Pesquisar" url="#" />
+        <p:growl autoUpdate="true"/>
+
+        <p:panelMenu style="width:300px">
+            <p:submenu label="Pedidos">
+                <p:menuitem value="Novo Pedido" url="http://www.primefaces.org" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Pedidos" actionListener="#{menuView.update}"  icon="ui-icon-search" />
             </p:submenu>
 
-            <p:submenu label="Notificação">
-                <p:menuitem value="Novo" url="#" />
-                <p:separator />
-                <p:menuitem value="Pesquisar" url="#" />
+            <p:submenu label="Clientes">
+                <p:menuitem value="Novo Cliente" url="../cliente/cliente.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Clientes" url="../cliente/cliente.jsf"  icon="ui-icon-search" />
             </p:submenu>
 
-            <p:submenu label="Cliente">
-                <p:menuitem value="Novo" url="../cliente/cliente.jsf?invalidate=true" />
-                <p:separator />
-                <p:menuitem value="Pesquisar" url="../cliente/cliente.jsf?invalidate=true" />
+            <p:submenu label="Fornecedores">
+                <p:menuitem value="Novo Fornecedor" url="../fornecedor/fornecedor.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Fornecedor" url="../fornecedor/fornecedor.jsf"  icon="ui-icon-search" />
+            </p:submenu>
+            
+            <p:submenu label="Produtos">
+                <p:menuitem value="Nova Bebida" url="../produto/bebida.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Novo Ingrediente" url="../produto/ingrediente.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Produtos" url="../fornecedor/produtos.jsf"  icon="ui-icon-search" />
             </p:submenu>
 
-            <p:submenu label="Produto">
-                <p:menuitem value="Novo" url="../cliente/cliente.jsf?invalidate=true" />
-                <p:separator />
-                <p:menuitem value="Pesquisar" url="../produto/produto.jsf?invalidate=true" />
-            </p:submenu>
-
-            <p:submenu label="Fornecedor">
-                <p:menuitem value="Novo" url="../fornecedor/fornecedor.jsf?invalidate=true" />
-                <p:separator />
-                <p:menuitem value="Pesquisar" url="../fornecedor/fornecedor.jsf?invalidate=true" />
-            </p:submenu>
-
-            <p:submenu label="Compra">
-                <p:menuitem value="Novo" url="#" />
-                <p:separator />
-                <p:menuitem value="Pesquisar" url="#" />
-            </p:submenu>
-
-        </p:menubar>
+         
+        </p:panelMenu>
     </h:form>
 </html>
