@@ -23,7 +23,7 @@
             </p:layoutUnit>
             <p:layoutUnit position="center">
 
-                <p:panel header="Pedidos">
+                <p:panel header="Pedidos Mesa">
                     <h:form id="form_pedido">
                         <p:growl id="growl" showDetail="true" sticky="true" />
                         <h:inputHidden id="id" value="#{pedidoMesaBean.pedido.id}"/>
@@ -104,27 +104,29 @@
 
 
                 <h:form>
-                    <p:dataTable id="pedidos" var="pedido" value="#{pedidoMesaBean.pedidos}" paginator="true">
+                    <p:dataTable id="pedidos" var="pedidoMesa" value="#{pedidoMesaBean.pedidos}" paginator="true">
                         <f:facet name="header">
-                            Lista de Pedidos Cadastrados
+                            Lista de Pedidos Local Cadastrados
                         </f:facet>
                         <p:column headerText="ID">
-                            <h:outputText value="#{pedido.id}"/>
+                            <h:outputText value="#{pedidoMesa.id}"/>
                         </p:column>
-                        <p:column headerText="Descrição">
-                            <h:outputText value="#{pedido.data}"/>
+                        <p:column headerText="Data">
+                           <h:outputText value="#{pedidoMesa.data.time}" >
+                                <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>
+                            </h:outputText>
                         </p:column>
                         <p:column headerText="Quantidade">
-                            <h:outputText value="#{pedido.total}"/>
+                            <h:outputText value="#{pedidoMesa.total}"/>
                         </p:column>
                         <p:column headerText="Solicitado Pagamento">
-                            <h:outputText value="#{pedido.solicitadoPagamento}"/>
+                            <h:outputText value="#{pedidoMesa.solicitadoPagamento}"/>
                         </p:column>
 
 
                         <p:column style="width:32px;text-align: center">
                             <p:commandButton update="pedidoDetail" oncomplete="PF('pedidoDialog').show()" icon="ui-icon-search" title="View">
-                                <f:setPropertyActionListener value="#{pedido}" target="#{pedidoMesaBean.selectedPedidoLocal}" />
+                                <f:setPropertyActionListener value="#{pedidoMesa}" target="#{pedidoMesaBean.selectedPedidoLocal}" />
                             </p:commandButton>
                         </p:column>
 
@@ -147,7 +149,10 @@
                         <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.numeroMesa}" />
 
                         <h:outputText value="Data" />
-                        <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.data}" />
+                        <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.data.time}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+                        </h:outputText>
+
 
                         <h:outputText value="Solicitado Pagamento" />
                         <h:outputText value="#{pedidoMesaBean.selectedPedidoLocal.solicitadoPagamento}" />

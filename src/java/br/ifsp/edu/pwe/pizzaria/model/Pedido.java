@@ -38,7 +38,7 @@ public abstract class Pedido implements Serializable {
     private Long id;
     @Column(name="ped_dt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar data;
+    private Calendar data = Calendar.getInstance();
     @ElementCollection(targetClass = Double.class)
     @JoinTable(name="pedido_detalhe",
                joinColumns = @JoinColumn(name="ped_id"))

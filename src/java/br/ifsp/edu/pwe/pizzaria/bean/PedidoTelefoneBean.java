@@ -2,9 +2,8 @@ package br.ifsp.edu.pwe.pizzaria.bean;
 
 import br.ifsp.edu.pwe.pizzaria.dao.BebidaDAO;
 import br.ifsp.edu.pwe.pizzaria.dao.ClienteDAO;
-import br.ifsp.edu.pwe.pizzaria.dao.PedidoDAO;
+import br.ifsp.edu.pwe.pizzaria.dao.PedidoTelefoneDAO;
 import br.ifsp.edu.pwe.pizzaria.dao.PizzaDAO;
-import br.ifsp.edu.pwe.pizzaria.dao.ProdutoDAO;
 import br.ifsp.edu.pwe.pizzaria.model.Bebida;
 import br.ifsp.edu.pwe.pizzaria.model.PedidoTelefone;
 import br.ifsp.edu.pwe.pizzaria.model.Pizza;
@@ -22,8 +21,7 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class PedidoTelefoneBean {
 
-    private final PedidoDAO pedidoDAO = new PedidoDAO();
-    private final ProdutoDAO produtoDAO = new ProdutoDAO();
+    private final PedidoTelefoneDAO pedidoTelefoneDAO = new PedidoTelefoneDAO();
     private final PizzaDAO pizzaDAO = new PizzaDAO();
     private final BebidaDAO bebidaDAO = new BebidaDAO();
     private final ClienteDAO clienteDAO = new ClienteDAO();
@@ -116,9 +114,9 @@ public class PedidoTelefoneBean {
     public void salvar() {
         FacesContext context = FacesContext.getCurrentInstance();
         if (this.pedido.getId() == null) {
-            this.pedidoDAO.insert(pedido);
+            this.pedidoTelefoneDAO.insert(pedido);
         } else {
-            this.pedidoDAO.update(pedido);
+            this.pedidoTelefoneDAO.update(pedido);
         }
         context.addMessage(null, new FacesMessage("Sucesso", "Dados Salvos com Sucesso"));
         this.pedido = new PedidoTelefone();
@@ -126,17 +124,17 @@ public class PedidoTelefoneBean {
 
     public void editar(Long id) {
         FacesContext context = FacesContext.getCurrentInstance();
-        this.pedido = (PedidoTelefone) this.pedidoDAO.find(id);
+        this.pedido = (PedidoTelefone) this.pedidoTelefoneDAO.find(id);
     }
 
     public void excluir(Long id) {
         FacesContext context = FacesContext.getCurrentInstance();
-        this.pedidoDAO.delete(id);
+        this.pedidoTelefoneDAO.delete(id);
         context.addMessage(null, new FacesMessage("Sucesso", "Exclusão Realizada com Sucesso"));
     }
 
     public List<PedidoTelefone> getPedidos() {
-        return (List<PedidoTelefone>) (List) this.pedidoDAO.getList();
+        return this.pedidoTelefoneDAO.getList();
     }
 
     public List<Pizza> getPizzas() {

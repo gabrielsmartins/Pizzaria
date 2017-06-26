@@ -23,7 +23,7 @@
             </p:layoutUnit>
             <p:layoutUnit position="center">
 
-                <p:panel header="Pedidos">
+                <p:panel header="Pedidos Telefone">
                     <h:form id="form_pedido">
                         <p:growl id="growl" showDetail="true" sticky="true" />
                         <h:inputHidden id="id" value="#{pedidoTelefoneBean.pedido.id}"/>
@@ -129,27 +129,29 @@
 
                 <h:form>
 
-                    <p:dataTable id="pedidos" var="pedido" value="#{pedidoTelefoneBean.pedidos}" paginator="true">
+                    <p:dataTable id="pedidos" var="pedidoTelefone" value="#{pedidoTelefoneBean.pedidos}" paginator="true">
                         <f:facet name="header">
-                            Lista de Pedidos Cadastrados
+                            Lista de Pedidos Telefone Cadastrados
                         </f:facet>
                         <p:column headerText="ID">
-                            <h:outputText value="#{pedido.id}"/>
+                            <h:outputText value="#{pedidoTelefone.id}"/>
                         </p:column>
-                        <p:column headerText="Descrição">
-                            <h:outputText value="#{pedido.data}"/>
+                        <p:column headerText="Data">
+                            <h:outputText value="#{pedidoTelefone.data.time}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00" />
+                            </h:outputText>
                         </p:column>
                         <p:column headerText="Quantidade">
-                            <h:outputText value="#{pedido.total}"/>
+                            <h:outputText value="#{pedidoTelefone.total}"/>
                         </p:column>
                         <p:column headerText="Telefone Cliente:">
-                            <h:outputText value="#{pedido.cliente.telefone}"/>
+                            <h:outputText value="#{pedidoTelefone.cliente.telefone}"/>
                         </p:column>
 
 
                         <p:column style="width:32px;text-align: center">
                             <p:commandButton update="pedidoDetail" oncomplete="PF('pedidoDialog').show()" icon="ui-icon-search" title="View">
-                                <f:setPropertyActionListener value="#{pedido}" target="#{pedidoTelefoneBean.selectedPedidoTelefone}" />
+                                <f:setPropertyActionListener value="#{pedidoTelefone}" target="#{pedidoTelefoneBean.selectedPedidoTelefone}" />
                             </p:commandButton>
                         </p:column>
 
@@ -163,8 +165,8 @@
                 </h:form>
 
             </p:layoutUnit>
-            
-            
+
+
             <p:dialog header="Pedido Informações" widgetVar="pedidoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="pedidoDetail" style="text-align:center;">
                     <p:panelGrid  columns="2" rendered="#{not empty pedidoTelefoneBean.selectedPedidoTelefone}" columnClasses="label,value">
@@ -175,7 +177,9 @@
                         <h:outputText value="#{pedidoTelefoneBean.selectedPedidoTelefone.cliente.telefone}" />
 
                         <h:outputText value="Data" />
-                        <h:outputText value="#{pedidoTelefoneBean.selectedPedidoTelefone.data}" />
+                        <h:outputText value="#{pedidoTelefoneBean.selectedPedidoTelefone.data.time}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>
+                        </h:outputText>
 
                         <h:outputText value="Total" />
                         <h:outputText value="#{pedidoTelefoneBean.selectedPedidoTelefone.total}" />

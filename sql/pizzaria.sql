@@ -75,7 +75,7 @@ CREATE TABLE pizza_ingrediente(pizza_id INT NOT NULL,
                                ON DELETE CASCADE);
 
 CREATE TABLE pedido(ped_id INT AUTO_INCREMENT NOT NULL,
-					ped_dt DATETIME DEFAULT CURRENT_TIMESTAMP,
+					ped_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     ped_total NUMERIC(15,2) NOT NULL,
                     ped_cli_id INT DEFAULT NULL,
                     ped_num_mesa INT DEFAULT NULL,
