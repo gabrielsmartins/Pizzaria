@@ -1,12 +1,73 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Notificação</title>
-    </h:head>
+        <h:outputStylesheet library="font-awesome-4.7.0" name="css/font-awesome.css"/>
+        <h:outputStylesheet library="css" name="ribbon.css"/>
+    </h:head>   
     <h:body>
-        Hello from Facelets
+
+
+        <p:layout style="min-width:400px;min-height:200px;">
+            <p:layoutUnit position="north" resizable="false">
+                <ui:include src="../common/welcome.xhtml" />
+            </p:layoutUnit>
+            <p:layoutUnit position="west">
+                <ui:include src="../common/menu.xhtml" />
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+
+                <p:panel header="Notificações">
+                    <h:form>
+                        <h:panelGrid columns="3">
+                            <p:outputLabel value="Pedido:"/>
+
+                            <p:selectOneMenu id="pedido" value="#{notificacaoBean.idPedido}" style="width: 300px;" required="true" requiredMessage="Por favor escolha o Fornecedor">
+                                <f:selectItem itemLabel="Selecione Um" itemValue="" />
+                                <c:forEach items="#{notificacaoBean.pedidos}" var="pedido" varStatus="loop">
+                                    <f:selectItem itemValue="#{pedido.id}" itemLabel="#{pedido.id}" />
+                                </c:forEach>
+                            </p:selectOneMenu>
+                            
+                             <p:commandButton value="Emitir" action="#{notificacaoBean.emitir()}" ajax="false"/> 
+                        </h:panelGrid>
+
+                        <p:dataTable id="notificacao" var="notificacao" value="#{notificacaoBean.notificacoes}" paginator="true">
+                            <f:facet name="header">
+                                Lista de Notificações Emitidas
+                            </f:facet>
+                            <p:column headerText="ID">
+                                <h:outputText value="#{notificacao.id}"/>
+                            </p:column>
+                            <p:column headerText="Data">
+                                <h:outputText value="#{notificacao.dataHora.time}" >
+                                    <f:convertDateTime  pattern="dd/MM/yyyy HH:mm" timeZone="GMT-03:00"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Número Pedido">
+                                <h:outputText value="#{notificacao.pedido.id}"/>
+                            </p:column>
+                            <p:column headerText="Número Mesa">
+                                <h:outputText value="#{notificacao.pedido.numeroMesa}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+                </p:panel>
+            </p:layoutUnit>
+
+
+
+
+        </p:layout>
+
     </h:body>
 </html>
 

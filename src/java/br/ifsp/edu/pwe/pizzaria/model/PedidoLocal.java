@@ -5,8 +5,11 @@
  */
 package br.ifsp.edu.pwe.pizzaria.model;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -20,6 +23,9 @@ public class PedidoLocal extends Pedido {
    private Long numeroMesa;
    @Column(name="ped_solic_pag") 
    private Boolean solicitadoPagamento;
+   @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY,cascade = javax.persistence.CascadeType.ALL)
+   private List<Notificacao> notificacoes;
+   
 
     public Long getNumeroMesa() {
         return numeroMesa;
@@ -35,6 +41,14 @@ public class PedidoLocal extends Pedido {
 
     public void setSolicitadoPagamento(Boolean solicitadoPagamento) {
         this.solicitadoPagamento = solicitadoPagamento;
+    }
+
+    public List<Notificacao> getNotificao() {
+        return notificacoes;
+    }
+
+    public void setNotificao(List<Notificacao> notificao) {
+        this.notificacoes = notificao;
     }
    
    

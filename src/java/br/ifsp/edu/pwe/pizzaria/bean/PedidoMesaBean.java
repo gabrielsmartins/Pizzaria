@@ -85,6 +85,7 @@ public class PedidoMesaBean {
     public void adicionarBebida() {
         Bebida bebida = this.bebidaDAO.find(idBebida);
         this.pedidoLocal.adicionarItem(bebida, qntdBebida);
+ 
     }
 
     public void salvar() {
@@ -99,8 +100,7 @@ public class PedidoMesaBean {
     }
 
     public void editar(Long id) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        this.pedidoLocal = (PedidoLocal) this.pedidoLocalDAO.find(id);
+        this.pedidoLocal =  this.pedidoLocalDAO.find(id);
     }
 
     public void excluir(Long id) {

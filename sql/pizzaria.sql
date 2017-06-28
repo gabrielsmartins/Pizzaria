@@ -91,7 +91,33 @@ CREATE TABLE pedido_detalhe(ped_id INT NOT NULL,
                             CONSTRAINT FK_pedido_detalhe_pedido FOREIGN KEY(ped_id) REFERENCES pedido(ped_id),
                             CONSTRAINT FK_pedido_detalhe_produto FOREIGN KEY(prod_id) REFERENCES produto(prod_id));
                             
-                            
+                   
+CREATE TABLE notificacao(not_id INT AUTO_INCREMENT NOT NULL,
+					   not_ped_id INT NOT NULL,
+                       not_dt_hr TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                       CONSTRAINT PK_notificao PRIMARY KEY(not_id),
+                       CONSTRAINT FK_notificao_pedido FOREIGN KEY(not_ped_id) REFERENCES pedido(ped_id));
+                       
+                       
+CREATE TABLE pagamento(pag_id INT NOT NULL AUTO_INCREMENT,
+					   pag_ped_id INT NOT NULL,
+                       pag_forma VARCHAR(200) NOT NULL,
+                       pag_vlr_recb NUMERIC (15,2) NOT NULL,
+                       pag_desconto NUMERIC(15,2) NOT NULL,
+                       CONSTRAINT PK_pagamento PRIMARY KEY(pag_id),
+                       CONSTRAINT FK_pagamento_pedido FOREIGN KEY(pag_ped_id) REFERENCES pedido(ped_id),
+                       CONSTRAINT UNQ_pagamento_pedido UNIQUE(pag_ped_id));
+
+CREATE TABLE comprovante_entrega(comp_id INT NOT NULL AUTO_INCREMENT,
+					   comp_ped_id INT NOT NULL,
+                       com_resp VARCHAR(200) NOT NULL,
+                       CONSTRAINT PK_comprovante_entrega PRIMARY KEY(comp_id),
+                       CONSTRAINT FK_comprovante_pedido FOREIGN KEY(comp_ped_id) REFERENCES pedido(ped_id),
+                       CONSTRAINT UNQ_comprovante_pedido UNIQUE(comp_ped_id));
+                       
+                       
+                       DROP TABLE pagamento;
+						
 
 SELECT * FROM cliente;
 SELECT * FROM fornecedor;

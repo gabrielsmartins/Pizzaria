@@ -76,8 +76,6 @@
 
                             <p:commandButton id="adicionarBebida" value="Adicionar"  update=":form_pedido:tabela" actionListener="#{pedidoMesaBean.adicionarBebida()}"/>
 
-
-
                             <p:dataTable id="tabela" var="produtoEntry" value="#{pedidoMesaBean.pedido.itens.entrySet().toArray()}">
                                 <p:column headerText="Produto">
                                     <h:outputText value="#{produtoEntry.key.descricao}"/>
@@ -131,10 +129,10 @@
                         </p:column>
 
                         <p:column style="width:32px;text-align: center">
-                            <p:commandButton icon="ui-icon-closethick" action="#{pedidoMesaBean.excluir(pedido.id)}" ajax="false"/> 
+                            <p:commandButton icon="ui-icon-closethick" action="#{pedidoMesaBean.excluir(pedidoMesa.id)}" ajax="false"/> 
                         </p:column>
                         <p:column style="width:32px;text-align: center">
-                            <p:commandButton icon="ui-icon-pencil" action="#{pedidoMesaBean.editar(pedido.id)}" ajax="false"/> 
+                            <p:commandButton icon="ui-icon-pencil" action="#{pedidoMesaBean.editar(pedidoMesa.id)}" ajax="false"/> 
                         </p:column>
                     </p:dataTable>
                 </h:form>

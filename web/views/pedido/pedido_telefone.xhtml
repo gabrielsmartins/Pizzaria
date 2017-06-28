@@ -109,8 +109,6 @@
 
                             <p:commandButton id="adicionarBebida" value="Adicionar"  update=":form_pedido:tabela" actionListener="#{pedidoTelefoneBean.adicionarBebida()}"/>
 
-
-
                             <p:dataTable id="tabela" var="produtoEntry" value="#{pedidoTelefoneBean.pedido.itens.entrySet().toArray()}">
                                 <p:column headerText="Produto">
                                     <h:outputText value="#{produtoEntry.key.descricao}"/>

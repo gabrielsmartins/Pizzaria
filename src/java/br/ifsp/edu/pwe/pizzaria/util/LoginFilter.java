@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "Login", urlPatterns = {"*.jsf"})
+@WebFilter("/*")
 public class LoginFilter implements Filter {
 
     public LoginFilter() {
@@ -28,15 +28,18 @@ public class LoginFilter implements Filter {
             FilterChain chain) throws IOException, ServletException {
         try {
 
-            HttpServletRequest reqt = (HttpServletRequest) request;
+            HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse resp = (HttpServletResponse) response;
-            HttpSession session = reqt.getSession(false);
+            HttpSession session = req.getSession(false);
+            String loginURI = "/";
 
-            String reqURI = reqt.getRequestURI();
-            if ((session != null && session.getAttribute("usuarioLogado") != null)) {
+            boolean loggedIn = session != null && session.getAttribute("usuarioLogado") != null;
+            boolean loginRequest = req.getRequestURI().contains(loginURI);
+
+            if (loggedIn || loginRequest) {
                 chain.doFilter(request, response);
             } else {
-                resp.sendRedirect("index.jsf");
+                resp.sendRedirect(req.getContextPath() + "/");
             }
         } catch (IOException | ServletException e) {
             System.out.println(e.getMessage());

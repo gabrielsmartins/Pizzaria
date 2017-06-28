@@ -51,7 +51,7 @@
                             <p:outputLabel value="Bairro:" for="bairro"/>
                             <p:inputText id="bairro" value="#{fornecedorBean.fornecedor.bairro}" style="width: 400px;" required="true" requiredMessage="Por favor preencha o Bairro"/>
                             <p:outputLabel value="CEP: " for="cep"/>
-                            <p:inputText id="cep" value="#{fornecedorBean.fornecedor.cep}" required="true" requiredMessage="Por favor preencha o CEP"/>
+                            <p:inputText id="cep" style="width: 100px;" maxlength="8" value="#{fornecedorBean.fornecedor.cep}" required="true" requiredMessage="Por favor preencha o CEP"/>
                             <h:inputHidden/><h:inputHidden/>
 
                             <p:outputLabel value="Cidade: " for="cidade"/>
