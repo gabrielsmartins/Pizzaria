@@ -29,38 +29,44 @@
                         <h:inputHidden id="id" value="#{pedidoTelefoneBean.pedido.id}"/>
                         <h:panelGrid>
                             <p:row>
-                                <p:outputLabel value="Telefone:" for="telefone"/>
+                                <strong><p:outputLabel value="Telefone:" for="telefone"/></strong>
                                 <p:inputText id="telefone" value="#{pedidoTelefoneBean.telefone}" style="width:100px;" required="true" requiredMessage="Por favor preencha o Telefone do Cliente"/>
                                 <p:commandButton action="#{pedidoTelefoneBean.pesquisarClientePorTelefone()}" update="@form,growl" icon="ui-icon-search" ajax="false"/>
                             </p:row>
 
+                            <p:row>
+                                <strong><p:outputLabel value="Cliente:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.nome}"/>
+                            </p:row>
 
-                            <p:outputLabel value="Cliente:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.nome}"/>
+                            <p:row>
+                                <strong><p:outputLabel value="Endereço:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.endereco}"/>
 
-                            <p:outputLabel value="Endereço:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.endereco}"/>
+                                <strong><p:outputLabel value="Número:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.numero}"/>
 
-                            <p:outputLabel value="Número:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.numero}"/>
+                                <strong><p:outputLabel value="Complemento:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.complemento}"/>
+                            </p:row>
 
-                            <p:outputLabel value="Complemento:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.complemento}"/>
+                            <p:row>
+                                <strong><p:outputLabel value="Bairro:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.bairro}"/>
 
-                            <p:outputLabel value="Bairro:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.bairro}"/>
+                                <strong><p:outputLabel value="CEP:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.cep}"/>
+                            </p:row>
 
-                            <p:outputLabel value="CEP:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.cep}"/>
+                            <p:row>
+                                <strong><p:outputLabel value="Cidade:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.cidade}"/>
 
-                            <p:outputLabel value="Cidade:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.cidade}"/>
+                                <strong><p:outputLabel value="Estado:"/></strong>
+                                <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.estado}"/>
+                            </p:row>
 
-                            <p:outputLabel value="Estado:"/>
-                            <p:outputLabel value="#{pedidoTelefoneBean.pedido.cliente.estado}"/>
-
-
-                            <p:outputLabel value="Pizzas:" for="pizzas"/>
+                            <strong><p:outputLabel value="Pizzas:" for="pizzas"/></strong>
                             <p:selectOneMenu id="pizzas" value="#{pedidoTelefoneBean.idPizza}" style="width: 300px;">
                                 <f:selectItem itemLabel="Selecione Um" itemValue="" />
                                 <c:forEach items="#{pedidoTelefoneBean.pizzas}" var="pizza" varStatus="loop">

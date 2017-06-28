@@ -12,9 +12,27 @@
             <p:submenu label="Pedidos">
                 <p:menuitem value="Novo Pedido Mesa" url="../pedido/pedido_mesa.jsf" icon="ui-icon-plus" />
                 <p:menuitem value="Novo Pedido Telefone" url="../pedido/pedido_telefone.jsf" icon="ui-icon-plus" />
-                <p:menuitem value="Pesquisar Pedidos" url="../pedido/pedido.jsf" icon="ui-icon-search" />
+                <p:menuitem value="Nova Solicitação de Pagamento" url="../pedido/solicitar_pagamento.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Pedidos" url="../pedido/pedidos.jsf" icon="ui-icon-search" />
+            </p:submenu>
+            
+            <p:submenu label="Notificações">
+                <p:menuitem value="Nova Notificação" url="../notificacao/notificacao.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Notificações" url="../notificacao/notificacao.jsf"  icon="ui-icon-search" />
+            </p:submenu>
+            
+            <p:submenu label="Pagamentos">
+                <p:menuitem value="Novo Pagamento" url="../pagamento/pagamento.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Pagamentos" url="../pagamento/pagamento.jsf"  icon="ui-icon-search" />
+                <p:menuitem value="Pesquisar Pedidos em Aberto" url="../pagamento/pagamento.jsf"  icon="ui-icon-search" />
             </p:submenu>
 
+            <p:submenu label="Entregas">
+                <p:menuitem value="Novo Comprovante" url="../comprovante/comprovante.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Comprovantes" url="../comprovante/comprovante.jsf"  icon="ui-icon-search" />
+                 <p:menuitem value="Pesquisar Pedidos em Aberto" url="../comprovante/comprovante.jsf"  icon="ui-icon-search" />
+            </p:submenu>
+            
             <p:submenu label="Clientes">
                 <p:menuitem value="Novo Cliente" url="../cliente/cliente.jsf" icon="ui-icon-plus" />
                 <p:menuitem value="Pesquisar Clientes" url="../cliente/cliente.jsf"  icon="ui-icon-search" />
@@ -30,6 +48,11 @@
                 <p:menuitem value="Novo Ingrediente" url="../produto/ingrediente.jsf" icon="ui-icon-plus" />
                 <p:menuitem value="Nova Pizza" url="../produto/pizza.jsf" icon="ui-icon-plus" />
                 <p:menuitem value="Pesquisar Produtos" url="../fornecedor/produtos.jsf"  icon="ui-icon-search" />
+            </p:submenu>
+            
+             <p:submenu label="Compras">
+                <p:menuitem value="Nova Comrpa" url="../compra/compra.jsf" icon="ui-icon-plus" />
+                <p:menuitem value="Pesquisar Compras" url="../compra/compra.jsf"  icon="ui-icon-search" />
             </p:submenu>
 
         </p:panelMenu>

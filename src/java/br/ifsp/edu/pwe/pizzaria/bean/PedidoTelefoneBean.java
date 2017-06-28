@@ -25,18 +25,18 @@ public class PedidoTelefoneBean {
     private final PizzaDAO pizzaDAO = new PizzaDAO();
     private final BebidaDAO bebidaDAO = new BebidaDAO();
     private final ClienteDAO clienteDAO = new ClienteDAO();
-    private PedidoTelefone pedido = new PedidoTelefone();
+    private PedidoTelefone pedidoTelefone = new PedidoTelefone();
     private PedidoTelefone selectedPedidoTelefone = new PedidoTelefone();
     private Long idBebida, idPizza;
     private Double qntdPizza, qntdBebida;
     private Long telefone;
 
     public PedidoTelefone getPedido() {
-        return pedido;
+        return pedidoTelefone;
     }
 
     public void setPedido(PedidoTelefone pedido) {
-        this.pedido = pedido;
+        this.pedidoTelefone = pedido;
     }
 
     public PedidoTelefone getSelectedPedidoTelefone() {
@@ -58,7 +58,7 @@ public class PedidoTelefoneBean {
     
     public void pesquisarClientePorTelefone(){
         try{
-             this.pedido.setCliente(this.clienteDAO.pesquisaClientePorTelefone(Long.valueOf(telefone.toString())));
+             this.pedidoTelefone.setCliente(this.clienteDAO.pesquisaClientePorTelefone(Long.valueOf(telefone.toString())));
         }catch(Exception e){
             FacesContext context = FacesContext.getCurrentInstance();
              context.addMessage(null, new FacesMessage("Atenção", "Cliente não Cadastrado"));
@@ -102,29 +102,29 @@ public class PedidoTelefoneBean {
 
     public void adicionarPizza() {
         Pizza pizza = this.pizzaDAO.find(idPizza);
-        this.pedido.adicionarItem(pizza, qntdPizza);
+        this.pedidoTelefone.adicionarItem(pizza, qntdPizza);
 
     }
 
     public void adicionarBebida() {
         Bebida bebida = this.bebidaDAO.find(idBebida);
-        this.pedido.adicionarItem(bebida, qntdBebida);
+        this.pedidoTelefone.adicionarItem(bebida, qntdBebida);
     }
 
     public void salvar() {
         FacesContext context = FacesContext.getCurrentInstance();
-        if (this.pedido.getId() == null) {
-            this.pedidoTelefoneDAO.insert(pedido);
+        if (this.pedidoTelefone.getId() == null) {
+            this.pedidoTelefoneDAO.insert(pedidoTelefone);
         } else {
-            this.pedidoTelefoneDAO.update(pedido);
+            this.pedidoTelefoneDAO.update(pedidoTelefone);
         }
         context.addMessage(null, new FacesMessage("Sucesso", "Dados Salvos com Sucesso"));
-        this.pedido = new PedidoTelefone();
+        this.pedidoTelefone = new PedidoTelefone();
     }
 
     public void editar(Long id) {
         FacesContext context = FacesContext.getCurrentInstance();
-        this.pedido = (PedidoTelefone) this.pedidoTelefoneDAO.find(id);
+        this.pedidoTelefone = (PedidoTelefone) this.pedidoTelefoneDAO.find(id);
     }
 
     public void excluir(Long id) {
